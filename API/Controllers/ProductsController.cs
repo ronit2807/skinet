@@ -1,20 +1,17 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using API.Dto;
+using API.Errors;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
-using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductsController : ControllerBase
+
+    public class ProductsController : BaseController
     {
 
         private readonly IGenericRepository<Product> productRepo;
@@ -57,12 +54,15 @@ namespace API.Controllers
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
 
             var product = await productRepo.GetEntityWithSpec(spec);
+            if(product == null) return NotFound(new ApiResponse(404));
             return mapper.Map<Product,ProductToReturnDto>(product);
         }
 
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyCollection<ProductBrand>>> GetProductBrands()
         {
+            //throw new System.Exception("Hello");
+            //return Ok(new ApiResponse(400));
             return Ok(await productBrandRepo.GetAllAsync());
         }
 
