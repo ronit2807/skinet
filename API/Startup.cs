@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StackExchange.Redis;
 
 namespace API
 {
@@ -36,6 +37,11 @@ namespace API
                 opt.AddPolicy("CorsPolicy",policy =>{
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
                 });
+            });
+
+            services.AddSingleton<IConnectionMultiplexer>(c=> {
+                var config = ConfigurationOptions.Parse(configuration.GetConnectionString("Redis"),true);
+                return ConnectionMultiplexer.Connect(config);
             });
         }
 
