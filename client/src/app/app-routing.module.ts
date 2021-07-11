@@ -7,10 +7,10 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
 import { ShopComponent } from './shop/shop.component';
 
 const routes: Routes = [
-  {path: '',component: HomeComponent},
-  {path: 'server-error',component: ServerErrorComponent},
-  {path: 'not-found',component: NotFoundComponent},
-  {path: 'shop', loadChildren: ()=> import('./shop/shop.module').then(mod => mod.ShopModule)},
+  {path: '',component: HomeComponent, data: {breadcrumb: 'Home'}},
+  {path: 'server-error',component: ServerErrorComponent, data: {breadcrumb: 'server-error'}},
+  {path: 'not-found',component: NotFoundComponent, data: {breadcrumb: 'not-found'}},
+  {path: 'shop', loadChildren: ()=> import('./shop/shop.module').then(mod => mod.ShopModule), data: {breadcrumb: 'shop'}},
   {path: '**',redirectTo: '',pathMatch: 'full'}
 ];
 
