@@ -33,6 +33,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           }
           if(error.status === 404 ){
             this.router.navigateByUrl('/not-found');
+            
           }
           if(error.status === 500){
             const navigationExtras: NavigationExtras = {

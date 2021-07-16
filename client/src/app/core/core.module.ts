@@ -7,6 +7,7 @@ import { ServerErrorComponent } from './server-error/server-error.component';
 import { ToastrModule } from 'ngx-toastr';
 import { SectionHeadersComponent } from './section-headers/section-headers.component';
 import { BreadcrumbModule } from 'xng-breadcrumb';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -19,7 +20,8 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
       positionClass:'toast-right-bottom',
       preventDuplicates:true
     }),
-    BreadcrumbModule
+    BreadcrumbModule,
+    SharedModule
   ],
   exports: [
     NavBarComponent,
