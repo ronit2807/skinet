@@ -12,7 +12,7 @@ import { IUser } from '../shared/models/user';
 export class AccountService {
 
   baseUrl = environment.apiUrl;
-  currentUserSource = new ReplaySubject<IUser>(1);
+  currentUserSource = new ReplaySubject<IUser>(null);
   currentUser$ = this.currentUserSource.asObservable();
   constructor(private http: HttpClient,private router:Router) { }
 

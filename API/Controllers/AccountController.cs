@@ -30,6 +30,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
+            
             var email = User.FindFirstValue(ClaimTypes.Email);
             var user = await userManager.FindByEmailAsync(email);
             return new UserDto
